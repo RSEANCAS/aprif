@@ -1,0 +1,544 @@
+﻿
+@{
+    ViewBag.Title = "Factura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headers{
+    <link href="@Url.Content("~/Assets/plugins/themify-icons/themify-icons.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/select2/css/select2.min.css")" rel="stylesheet">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="@Url.Content("~/Assets/css/nifty.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/css/demo/nifty-demo-icons.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/css/demo/nifty-demo.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/loaders/css/css-loaders.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/datatables/extensions/Responsive/css/responsive.dataTables.min.css")" rel="stylesheet">
+}
+
+@section scripts{
+    <script src="@Url.Content("~/Assets/js/jquery.min.js")"><</script>
+    <script src="@Url.Content("~/Assets/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Assets/js/demo/nifty-demo.min.js")"></script>
+
+    <script src="@Url.Content("~/Assets/plugins/loaders/blockui.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+    <script src="@Url.Content("~/Assets/js/demo/factura.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js")"></script>
+    <script src="@Url.Content("~/Assets/js/demo/config.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/select2/js/select2.min.js")"></script>
+    <script src="@Url.Content("~/Assets/js/nifty.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootbox/bootbox.min.js")"></script>
+
+    <script src="@Url.Content("~/Assets/plugins/datatables/media/js/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/datatables/media/js/dataTables.bootstrap.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js")"></script>
+
+    <script src="@Url.Content("~/Assets/js/demo/tables-datatables.js")"></script>
+    
+}
+<div>
+    <div>
+        <div>
+            <div id="page-tittle">
+                <h1 class="page-header text-overflow">FACTURA</h1>
+
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <form id="frmfactura" action="EmiteFactura()" method="post" novalidate="novalidate">
+                            <!--Purple Accordion-->
+                            <!--===================================================-->
+                            <div class="panel-group accordion" id="demo-acc-purple">
+
+                                <div class="panel panel-purple">
+                                    <!-- Accordion title -->
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-parent="#demo-acc-purple" data-toggle="collapse" href="#demo-acd-purple-1" class="bg-dark">Datos del Comprobante</a>
+                                        </h4>
+                                    </div>
+                                    <!-- Accordion content -->
+                                    <div class="panel-collapse collapse in" id="demo-acd-purple-1">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <select class="form-control val-exc select2-show-accessible" name="cmbtipooperacion" id="cmbtipooperacion" data-bv-field="cmbtipooperacion" tabindex="-1" aria-hidden="false" onchange="ValidaTipoDocumentoCliente($('#cmbtipooperacion').val())">
+                                                        </select>
+                                                        <i class="form-control-feedback bv-no-label fa fa-times-circle fa-lg" data-bv-icon-for="cmbtipooperacion" style=""></i>
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo de Operación</font></font></span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <select class="form-control val-exc select2-show-accessible" name="cmbtipomoneda" id="cmbtipomoneda" data-bv-field="cmbtipomoneda" tabindex="-1" aria-hidden="false">
+                                                        </select>
+                                                        <i class="form-control-feedback bv-no-label fa fa-times-circle fa-lg" data-bv-icon-for="cmbtipomoneda" style=""></i>
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Moneda</font></font></span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control val-exc select2-show-accessible" name="cmbserie" id="cmbserie" data-bv-field="cmbserie" tabindex="-1" aria-hidden="true">
+                                                    </select>
+                                                    <i class="form-control-feedback bv-no-label fa fa-times-circle fa-lg" data-bv-icon-for="cmbserie" style=""></i>
+                                                    <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Serie</font></font></span>
+                                                </div>
+
+                                                <div class="col-sm-2">
+                                                    <div id="demo-dp-component">
+                                                        <div class="input-group date">
+                                                            <input type="text" class="form-control" id="txtfechaemision" name="txtfechaemision" readonly>
+                                                            <span class="input-group-addon"><i class="demo-pli-calendar-4"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fecha de Emisión</font></font></span>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div id="demo-dp-component">
+                                                        <div class="input-group date">
+                                                            <input type="text" class="form-control" id="txtfechavencimiento" name="txtfechavencimiento" readonly>
+                                                            <span class="input-group-addon"><i class="demo-pli-calendar-4"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fecha de Vencimiento</font></font></span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <!--<a data-toggle="collapse" href="#demo-acd-purple-2" class="collapsed btn btn-mini btn-primary btn-active-danger" aria-expanded="false">
+                                                        Siguiente
+                                                        <i class="icon-arrow-right14 position-right"></i>
+                                                    </a>-->
+                                                    <button type="button" data-target="#demo-acd-purple-2" data-parent="#demo-acc-purple" data-toggle="collapse" class="btn btn-success btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SIGUIENTE</font></font><i class="ion-plus"></i></button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-purple">
+                                    <!-- Accordion title -->
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-parent="#demo-acc-purple" data-toggle="collapse" href="#demo-acd-purple-2" class="collapsed bg-dark" aria-expanded="false">Datos del Cliente</a>
+                                        </h4>
+                                    </div>
+                                    <!-- Accordion content -->
+                                    <div class="panel-collapse collapse" id="demo-acd-purple-2" aria-expanded="false" style="height: 0px;">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <select class="form-control val-exc select2-show-accessible" name="cmbtipodocumentoidentidad" id="cmbtipodocumentoidentidad" data-bv-field="cmbtipodocumentoidentidad" tabindex="-1" aria-hidden="true">
+                                                        </select>
+                                                        <span class="bg-dark box-block pad-lft pad-rgt">Tipo Doc. Identidad</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <input onblur="buscacliente()" class="form-control" placeholder="N° Documento de Identidad" name="txtNumeroDocumentoIdentidad" id="txtNumeroDocumentoIdentidad" data-bv-field="txtNumeroDocumentoIdentidad">
+                                                        <span class="bg-dark box-block pad-lft pad-rgt">N° Documento de Identidad</span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input class="form-control" placeholder="Nombres Completos o Razón Social" name="txtNombres" id="txtNombres" data-bv-field="txtNombres" disabled>
+                                                        <span class="bg-dark box-block pad-lft pad-rgt">Nombres Completos o Razón Social</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <select class="form-control val-exc select2-show-accessible" name="cmbdireccion" id="cmbdireccion" data-bv-field="cmbdireccion" tabindex="-1" aria-hidden="true">
+                                                        </select>
+                                                        <i class="form-control-feedback bv-no-label fa fa-times-circle fa-lg" data-bv-icon-for="cmbdireccion" style=""></i>
+                                                        <span class="bg-dark box-block pad-lft pad-rgt">Dirección</span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <!--<button class="btn btn-primary btn-labeled position-right" ><i class="btn-label demo-psi-add position-center"></i> Anterior</button>
+                                                    <button class="btn btn-primary btn-labeled position-right"><i class="btn-label demo-psi-add position-center"></i> Siguiente</button>-->
+
+
+                                                    <button type="button" data-target="#demo-acd-purple-1" data-parent="#demo-acc-purple" data-toggle="collapse" class="btn btn-warning btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ANTERIOR</font></font><i class="ion-plus"></i></button>
+                                                </div>
+                                                <div class="col-sm-6">
+
+                                                    <button type="button" data-target="#demo-acd-purple-3" data-parent="#demo-acc-purple" data-toggle="collapse" class="btn btn-success btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SIGUIENTE</font></font><i class="ion-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-purple">
+                                    <!-- Accordion title -->
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-parent="#demo-acc-purple" data-toggle="collapse" href="#demo-acd-purple-3" class="collapsed bg-dark" aria-expanded="false">Detalle del Comprobante</a>
+                                        </h4>
+                                    </div>
+                                    <!-- Accordion content -->
+                                    <div class="panel-collapse collapse" id="demo-acd-purple-3" name="demo-acd-purple-3" aria-expanded="false">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Código" class="form-control" id="det_codigo" name="det_codigo" onblur="BuscaProducto()">
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Código</font></font></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Código Sunat" class="form-control" id="det_codigosunat" name="det_codigosunat">
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Código Sunat</font></font></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <select class="form-control val-exc select2-show-accessible" name="det_unidadmedida" id="det_unidadmedida" data-bv-field="det_unidadmedida" tabindex="-1" aria-hidden="true">
+                                                        </select>
+                                                        <i class="form-control-feedback bv-no-label fa fa-times-circle fa-lg" data-bv-icon-for="det_unidadmedida" style=""></i>
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Unidad Medida</font></font></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Descripción" class="form-control" id="det_descripcion" name="det_descripcion">
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Descripción</font></font></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-6 text-center aligncenter">
+                                                    <div class="radio" onchange="TipoCalculo($('input[name=inline-form-radio]:checked', '#tipocalculo').val())" id="tipocalculo" name="tipocalculo">
+                                                        <!-- Inline radio buttons -->
+                                                        <input value="VALORUNITARIO" id="demo-inline-form-radio" class="magic-radio" type="radio" name="inline-form-radio" checked="">
+                                                        <label for="demo-inline-form-radio">Valor Unitario</label>
+
+                                                        <input value="PRECIOUNITARIO" id="demo-inline-form-radio-2" class="magic-radio" type="radio" name="inline-form-radio">
+                                                        <label for="demo-inline-form-radio-2">Precio Unitario</label>
+
+                                                        <input value="IMPORTETOTAL" id="demo-inline-form-radio-3" class="magic-radio" type="radio" name="inline-form-radio">
+                                                        <label for="demo-inline-form-radio-3">Importe Total</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <select class="form-control val-exc select2-show-accessible" name="cmbtipoafectacionigv" id="cmbtipoafectacionigv" data-bv-field="cmbtipoafectacionigv" tabindex="-1" aria-hidden="true">
+                                                        </select>
+                                                        <i class="form-control-feedback bv-no-label fa fa-times-circle fa-lg" data-bv-icon-for="cmbtipoafectacionigv" style=""></i>
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo Afectación al IGV</font></font></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <input type="text" placeholder="0.00" class="form-control" id="det_cantidad" onblur="Calcula($('input[name=inline-form-radio]:checked', '#tipocalculo').val())">
+                                                    <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cantidad</font></font></span>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="text" placeholder="0.00" class="form-control" id="det_valorunitario" onblur="Calcula($('input[name=inline-form-radio]:checked', '#tipocalculo').val())">
+                                                    <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Valor Unitario</font></font></span>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="0.00" class="form-control" id="det_preciounitario" onblur="Calcula($('input[name=inline-form-radio]:checked', '#tipocalculo').val())">
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Precio Unitario</font></font></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="0.00" class="form-control" id="det_descuento" onblur="Calcula($('input[name=inline-form-radio]:checked', '#tipocalculo').val())">
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Descuento</font></font></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="0.00" class="form-control" id="det_igv" disabled>
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">IGV</font></font></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="0.00" class="form-control" id="det_isc" onblur="Calcula($('input[name=inline-form-radio]:checked', '#tipocalculo').val())">
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ISC</font></font></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="0.00" class="form-control" id="det_otroscargos" onblur="Calcula($('input[name=inline-form-radio]:checked', '#tipocalculo').val())">
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otros Cargos</font></font></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="text" placeholder="0.00" class="form-control" id="det_otrostributos" onblur="Calcula($('input[name=inline-form-radio]:checked', '#tipocalculo').val())">
+                                                    <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otros Tributos</font></font></span>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="text" placeholder="0.00" class="form-control" id="det_valorventa" disabled>
+                                                    <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Valor Venta</font></font></span>
+                                                </div>
+
+                                                <div class="col-sm-2">
+                                                    <input type="text" placeholder="0.00" class="form-control" id="det_importetotal" onblur="Calcula($('input[name=inline-form-radio]:checked', '#tipocalculo').val())">
+                                                    <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Importe Total</font></font></span>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="text" placeholder="0.00" class="form-control" id="det_importepercepcion" disabled>
+                                                    <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Importe Percepción</font></font></span>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="0.00" class="form-control" id="det_importepagar" disabled>
+                                                        <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Importe Pagar</font></font></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 ">
+                                                    <div class="form-group">
+                                                        <button onclick="btnAgregarDetalle_Click()" type="button" class="btn btn-success btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="btn-label demo-psi-add position-center"></i>Agregar</font></font><i class="add-on"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table id="tblDetalle" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                        <thead class="bg-dark">
+                                                            <tr>
+                                                                <th class="text-light">U. Medida</th>
+                                                                <th class="text-light">Descripción</th>
+                                                                <th class="text-light">Cant</th>
+                                                                <th class="text-light">Pre. Unitario</th>
+                                                                <th class="text-light">Dscto.</th>
+                                                                <th class="text-light">Importe Total</th>
+                                                                <th class="text-light">Opciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel panel-flat">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+
+                                                        </div>
+                                                        <div class="col-md-4" style="border:double">
+                                                            <table class="table table-xxs2 table-borderless table-striped">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-semibold">Total Gravado</td>
+                                                                        <td class="text-center"><span>S/</span></td>
+                                                                        <td class="text-right"><span class="label bg-teal-600" id="tot-gravado">0.000</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-semibold">Total Inafecto</td>
+                                                                        <td class="text-center"><span>S/</span></td>
+                                                                        <td class="text-right"><span class="label bg-teal-600" id="tot-inafecto">0.000</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-semibold">Total Exonerado</td>
+                                                                        <td class="text-center"><span>S/</span></td>
+                                                                        <td class="text-right"><span class="label bg-teal-600" id="tot-exonerado">0.000</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-semibold">Total Gratuito</td>
+                                                                        <td class="text-center"><span>S/</span></td>
+                                                                        <td class="text-right"><span class="label bg-teal-600" id="tot-gratuito">0.000</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-semibold">Total Exportación</td>
+                                                                        <td class="text-center"><span>S/</span></td>
+                                                                        <td class="text-right"><span class="label bg-teal-600" id="tot-exportacion">0.000</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-semibold">Total Descuento</td>
+                                                                        <td class="text-center"><span>S/</span></td>
+                                                                        <td class="text-right"><span class="label bg-teal-600" id="tot-descuento">0.000</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-semibold">Total ISC</td>
+                                                                        <td class="text-center"><span>S/</span></td>
+                                                                        <td class="text-right"><span class="label bg-teal-600" id="tot-isc">0.000</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-semibold">Total IGV</td>
+                                                                        <td class="text-center"><span>S/</span></td>
+                                                                        <td class="text-right"><span class="label bg-teal-600" id="tot-igv">0.000</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-semibold">Total Otros cargos</td>
+                                                                        <td class="text-center"><span>S/</span></td>
+                                                                        <td class="text-right"><span class="label bg-teal-600" id="tot-otroscargos">0.000</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-semibold">Total Otros tributos</td>
+                                                                        <td class="text-center"><span>S/</span></td>
+                                                                        <td class="text-right"><span class="label bg-teal-600" id="tot-otrostributos">0.000</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-semibold">Total Valor Venta</td>
+                                                                        <td class="text-center"><span>S/</span></td>
+                                                                        <td class="text-right"><span class="label bg-pink-600" id="tot-valorventa">0.000</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-bold"><h5>Total</h5></td>
+                                                                        <td class="text-center"><h5>S/</h5></td>
+                                                                        <td class="text-right"><h5 id="tot-total">0.000</h5></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+
+                                                    <input type="hidden" name="importeTotalHidden">
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-body text-right">
+                                                <div class="col-lg-12 ">
+                                                    <a data-parent="#demo-acc-purple" data-toggle="collapse" href="#demo-acd-purple-2" class="collapsed btn btn-mini btn-danger" aria-expanded="false">
+                                                        <span>Anterior</span>
+                                                        <i class="icon-arrow-right14 position-right"></i>
+                                                    </a>
+                                                    <a data-parent="#demo-acc-purple" data-toggle="collapse" href="#demo-acd-purple-4" class="collapsed btn btn-mini btn-primary" aria-expanded="false" onclick="vistapreliminar()">
+                                                        <span class="icon-arrow-right14 position-right">Vista Preliminar</span>
+                                                        <i class="icon-arrow-right14 position-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-purple">
+
+                                    <!-- Accordion title -->
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-parent="#demo-acc-purple" data-toggle="collapse" href="#demo-acd-purple-4" class="collapsed bg-dark" aria-expanded="false" >Vista Preliminar</a>
+                                        </h4>
+                                    </div>
+
+                                    <!-- Accordion content -->
+                                    <div class="panel-collapse collapse" id="demo-acd-purple-4" aria-expanded="false">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-12 bg-gray">
+                                                    <div class="row bg-trans-dark">
+                                                        <div class="col-sm-8" style="border:double">
+                                                            <div class="row text-bold">
+                                                                <span id="vp_emisor_razonsocial">LUIS JESUS YUPANQUI FLORES</span>
+                                                            </div>
+                                                            <div class="row text-bold">
+                                                                <span id="vp_emisor_direccion">MZ S10 D LOTE 04 AA.HH. JOSE CARLOS MARIATEGUI LIMA-LIMA-SAN JUAN DE LURIGANCHO</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 bg-gray">
+                                                            <div class="row text-center text-bold" style="border:double;height:100%"><span>FACTURA ELECTRÓNICA</span></div>
+                                                            <div class="row text-center text-bold" style="border:double;height:100%"><span>RUC: <span id="vp_ruc">10762193987</span></span></div>
+                                                            <div class="row text-center text-bold" style="border:double;height:100%"><span id="vp_serie"></span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <table style="border:double" cellspacing="0" width="100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-bold"><span id="vp_cliente_tipodocumentoidentidad"></span></td>
+                                                                        <td class="text-bold"> : </td>
+                                                                        <td class="text-bold"><span id="vp_cliente_numerodocumento"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-bold"><span>RAZÓN SOCIAL</span></td>
+                                                                        <td class="text-bold"> : </td>
+                                                                        <td class="text-bold"><span id="vp_cliente_razonsocial"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-bold"><span>DIRECCIÓN</span></td>
+                                                                        <td class="text-bold"> : </td>
+                                                                        <td class="text-bold"><span id="vp_cliente_direccion"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-bold"><span>MONEDA</span></td>
+                                                                        <td class="text-bold"> : </td>
+                                                                        <td class="text-bold"><span id="vp_tipomoneda"></span></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <table id="vp_tblDetalle" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                            <thead class="bg-dark">
+                                                                <tr>
+                                                                    <th class="text-light">U. Medida</th>
+                                                                    <th class="text-light">Descripción</th>
+                                                                    <th class="text-light">Cant</th>
+                                                                    <th class="text-light">Pre. Unitario</th>
+                                                                    <th class="text-light">Dscto.</th>
+                                                                    <th class="text-light">Importe Total</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <button type="button" onclick="EmiteFactura()" class="btn btn-success" name="signup" value="Sign up">EMITIR DOCUMENTO</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--===================================================-->
+                            <!--End Purple Accordion-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

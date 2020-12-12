@@ -1,0 +1,15 @@
+backend/.vs
+backend/ApriF.Be/bin
+backend/ApriF.Be/obj
+backend/ApriF.Bl/bin
+backend/ApriF.Bl/obj
+backend/ApriF.Da/bin
+backend/ApriF.Da/obj
+backend/ApriF.Rest/bin
+backend/ApriF.Rest/obj
+backend/ApriF.Util/bin
+backend/ApriF.Util/obj
+backend/ApriF.Web/bin
+backend/ApriF.Web/obj
+backend/ApriF.Web.Admin/bin
+backend/ApriF.Web.Admin/obj

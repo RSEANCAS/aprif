@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Reporte de Venta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section headers{
+    <link href="@Url.Content("~/Assets/plugins/themify-icons/themify-icons.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/select2/css/select2.min.css")" rel="stylesheet">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="@Url.Content("~/Assets/css/nifty.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/css/demo/nifty-demo-icons.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/css/demo/nifty-demo.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/loaders/css/css-loaders.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/datatables/extensions/Responsive/css/responsive.dataTables.min.css")" rel="stylesheet">
+}
+@section scripts{
+    <script src="@Url.Content("~/Assets/js/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Assets/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Assets/js/demo/nifty-demo.min.js")"></script>
+
+    <script src="@Url.Content("~/Assets/plugins/loaders/blockui.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js")"></script>
+    <script src="@Url.Content("~/Assets/js/demo/config.js")"></script>
+    <script src="@Url.Content("~/Assets/js/demo/reporte.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/select2/js/select2.min.js")"></script>
+    <script src="@Url.Content("~/Assets/js/nifty.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootbox/bootbox.min.js")"></script>
+
+    <script src="@Url.Content("~/Assets/plugins/datatables/media/js/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/datatables/media/js/dataTables.bootstrap.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js")"></script>
+
+    <script src="@Url.Content("~/Assets/js/demo/tables-datatables.js")"></script>
+}
+<div>
+    <div>
+        <div>
+            <div id="page-tittle">
+                <h1 class="page-header text-overflow text-light" onclick="page_Load()">REPORTE DE VENTA</h1>
+            </div>
+            <div class="panel-body bg-light">
+                
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <select class="form-control val-exc select2-show-accessible" name="cmbtipocomprobante" id="cmbtipocomprobante" data-bv-field="cmbtipocomprobante" tabindex="-1" aria-hidden="false">
+                                </select>
+                                <i class="form-control-feedback bv-no-label fa fa-times-circle fa-lg" data-bv-icon-for="cmbtipocomprobante" style=""></i>
+                                <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo de Comprobante</font></font></span>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div id="demo-dp-component">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" id="txtfechainicio" name="txtfechainicio" readonly>
+                                    <span class="input-group-addon"><i class="demo-pli-calendar-4"></i></span>
+                                </div>
+                            </div>
+                            <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fecha de Inicio</font></font></span>
+                        </div>
+                        <div class="col-sm-3">
+                            <div id="demo-dp-component">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" id="txtfechafin" name="txtfechafin" readonly>
+                                    <span class="input-group-addon"><i class="demo-pli-calendar-4"></i></span>
+                                </div>
+                            </div>
+                            <span class="bg-dark box-block pad-lft pad-rgt"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fecha de Fin</font></font></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Serie" name="txtSerie" id="txtSerie" data-bv-field="txtSerie" maxlength="4">
+                                <span class="bg-dark box-block pad-lft pad-rgt">Serie</span>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Número" name="txtNumero" id="txtNumero" data-bv-field="txtNumero">
+                                <span class="bg-dark box-block pad-lft pad-rgt">Número</span>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Número Doc. Identidad" name="txtNumeroDocumentoIdentidad" id="txtNumeroDocumentoIdentidad" data-bv-field="txtNumeroDocumentoIdentidad">
+                                <span class="bg-dark box-block pad-lft pad-rgt">Número de Documento de Identidad</span>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Nombres o Razón Social" name="txtNombre" id="txtNombre" data-bv-field="txtNombre">
+                                <span class="bg-dark box-block pad-lft pad-rgt">Nombres o Razón Social</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-primary" onclick="btnReporte_Click()"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Buscar</font></font><i class="ion-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <table id="tblReporteVenta" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="bg-dark text-light">
+                                <th class="min-desktop">Cliente</th>
+                                <th class="min-tablet text-light">Comprobante</th>
+                                <th class="min-table">Moneda</th>
+                                <th class="min-table">Fecha de Emisión</th>
+                                <th class="min-table">Monto</th>
+                                <th class="min-table">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

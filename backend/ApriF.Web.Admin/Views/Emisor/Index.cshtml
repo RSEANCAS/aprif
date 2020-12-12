@@ -1,0 +1,583 @@
+﻿
+@{
+    ViewBag.Titulo = "Emisor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headers{
+    <link href="@Url.Content("~/Assets/plugins/ionicons/css/ionicons.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/themify-icons/themify-icons.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/select2/css/select2.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/datatables/extensions/Responsive/css/responsive.dataTables.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/loaders/css/css-loaders.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.css")" rel="stylesheet">
+}
+
+@section scripts{
+    <script src="@Url.Content("~/Assets/plugins/loaders/blockui.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/datatables/media/js/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/datatables/media/js/dataTables.bootstrap.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/select2/js/select2.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+    <script src="@Url.Content("~/Assets/js/nifty.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootbox/bootbox.min.js")"></script>
+
+    <script src="@Url.Content("~/Assets/js/demo/config.js")"></script>
+    <script src="@Url.Content("~/Assets/js/demo/emisor.js")"></script>
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div id="panelEmisor" class="panel panel-dark">
+
+            <!--Panel heading-->
+            <div class="panel-heading">
+                <div class="panel-control">
+                    <button id="btnNuevo" name="btnNuevo" type="button" class="btn" onclick="btnNuevo_Click(event)"><i class="ti-file"></i> NUEVO</button>
+                    <button id="btnGuardar" name="btnGuardar" type="button" class="btn btn-success hidden" data-accion="N" onclick="btnGuardar_Click(event)"><i class="ti-save"></i> GUARDAR</button>
+                    <button id="btnCancelar" name="btnCancelar" type="button" class="btn btn-danger hidden" onclick="btnCancelar_Click(event)"><i class="ti-na"></i> CANCELAR</button>
+                </div>
+                <div class="panel-title">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab-busqueda"><i class="demo-psi-view-list"></i> Búsqueda</a>
+                        </li>
+                        <li class="disabled">
+                            <a data-toggle="tab" href="#tab-emisor"><i class="demo-psi-home"></i> Emisor</a>
+                        </li>
+                        <li class="disabled">
+                            <a data-toggle="tab" href="#tab-sucursal"><i class="demo-psi-map-marker"></i> Sucursales</a>
+                        </li>
+                        <li class="disabled">
+                            <a data-toggle="tab" href="#tab-serie"><i class="demo-psi-file"></i> Series</a>
+                        </li>
+                        <li class="disabled">
+                            <a data-toggle="tab" href="#tab-usuario"><i class="demo-psi-add-user"></i> Usuarios</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <!--Panel body-->
+            <div id="demo-panel-collapse-default" class="panel-body">
+                <!--Default Tabs (Left Aligned)-->
+                <!--===================================================-->
+
+                <!--Tabs Content-->
+                <form id="frmEmisor" name="frmEmisor">
+                    <div class="tab-content">
+                        <div id="tab-busqueda" class="tab-pane fade active in">
+                            <fieldset>
+                                <legend>Filtros de búsqueda</legend>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Ingrese RUC" name="txtFiltroEmisorId" id="txtFiltroEmisorId" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">RUC</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Ingrese Razón Social" name="txtFiltroRazonSocial" id="txtFiltroRazonSocial" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Razón Social</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Ingrese Nombre Comercial" name="txtFiltroNombreComercial" id="txtFiltroNombreComercial" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Nombre Comercial</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Ingrese Eslogan" name="txtFiltroEslogan" id="txtFiltroEslogan" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Eslogan</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2 col-sm-offset-10">
+                                            <div class="form-group">
+                                                <button id="btnBuscar" class="btn btn-dark btn-block">BUSCAR <i class="ion-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Resultados de la búsqueda</legend>
+                                <table id="tblEmisor" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="bg-dark">
+                                        <tr>
+                                            <th class="text-light">RUC</th>
+                                            <th class="text-light">Razón Social</th>
+                                            <th class="text-light">Nombre Comercial</th>
+                                            <th class="text-light">Eslogan</th>
+                                            <th class="text-light">De Baja</th>
+                                            <th class="text-light">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                        </div>
+                        <div id="tab-emisor" class="tab-pane fade">
+                            <fieldset>
+                                <legend>Datos del emisor</legend>
+                                <div class="row pad-lft pad-rgt">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="RUC" name="txtEmisorId_Emisor" id="txtEmisorId_Emisor" onblur="obtenerSunatEmisor(event)" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">RUC</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Razón Social" name="txtRazonSocial_Emisor" id="txtRazonSocial_Emisor" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Razón Social</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Nombre Comercial" name="txtNombreComercial_Emisor" id="txtNombreComercial_Emisor" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Nombre Comercial</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Eslogan" name="txtEslogan_Emisor" id="txtEslogan_Emisor" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Eslogan</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <select class="form-control" name="cbbDireccionFiscal_Emisor" id="cbbDireccionFiscal_Emisor"></select>
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Dirección Fiscal</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button type="button" data-target="#frm-sucursal-modal" data-toggle="modal" class="btn btn-dark btn-block">AGREGAR <i class="ion-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div id="tab-sucursal" class="tab-pane fade">
+                            <input type="hidden" id="txtCantidadSucursales_Emisor" name="txtCantidadSucursales_Emisor" value="" />
+                            <div id="msgErrorSucursal"></div>
+                            <fieldset>
+                                <legend>Datos de la sucursal</legend>
+                                <div class="row pad-lft pad-rgt">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Código" name="txtSucursalId_Sucursal" id="txtSucursalId_Sucursal" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Código</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Código SUNAT" name="txtCodigoSUNAT_Sucursal" id="txtCodigoSUNAT_Sucursal" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Código SUNAT</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Nombre" name="txtNombre_Sucursal" id="txtNombre_Sucursal" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Nombre</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input class="magic-checkbox val-exc" type="checkbox" name="chkEsDireccionFiscal_Sucursal" id="chkEsDireccionFiscal_Sucursal">
+                                                    <label for="chkEsDireccionFiscal_Sucursal">Es dirección fiscal</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Dirección" name="txtDireccion_Sucursal" id="txtDireccion_Sucursal" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Dirección</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Referencia" name="txtReferencia_Sucursal" id="txtReferencia_Sucursal" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Referencia</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <select class="form-control val-exc" name="cbbPaisId_Sucursal" id="cbbPaisId_Sucursal" onchange="cbbPais_Change(event)"></select>
+                                                <span class="bg-dark box-block pad-lft pad-rgt">País</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <select class="form-control val-exc" name="cbbDepartamentoId_Sucursal" id="cbbDepartamentoId_Sucursal" onchange="cbbDepartamento_Change(event)"></select>
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Departamento</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <select class="form-control val-exc" name="cbbProvinciaId_Sucursal" id="cbbProvinciaId_Sucursal" onchange="cbbProvincia_Change(event)"></select>
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Provincia</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <select class="form-control val-exc" name="cbbDistritoId_Sucursal" id="cbbDistritoId_Sucursal"></select>
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Distrito</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-offset-9 col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-offset-6 col-sm-6">
+                                                    <button id="btnAgregarSucursal" type="button" data-tipo="form" class="btn btn-dark btn-block" data-accion="A" onclick="btnAgregarSucursal_Click(event)">AGREGAR <i class="ion-plus"></i></button>
+                                                </div>
+                                                <div class="col-sm-6 hidden">
+                                                    <button id="btnCancelarSucursal" type="button" data-tipo="form" class="btn btn-danger btn-block" onclick="btnCancelarSucursal_Click(event)">CANCELAR <i class="ion-close-round"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Lista de sucursales</legend>
+                                <table id="tblSucursal" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="bg-dark">
+                                        <tr>
+                                            <th class="text-light">#</th>
+                                            <th class="text-light">Código</th>
+                                            <th class="text-light">Código SUNAT</th>
+                                            <th class="text-light">Nombre</th>
+                                            <th class="text-light">Dirección</th>
+                                            <th class="text-light">Referencia</th>
+                                            <th class="text-light">Fiscal</th>
+                                            <th class="text-light">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                        </div>
+                        <div id="tab-serie" class="tab-pane fade">
+                            <input type="hidden" id="txtCantidadSeries_Emisor" name="txtCantidadSeries_Emisor" value="" />
+                            <div id="msgErrorSerie"></div>
+                            <fieldset>
+                                <legend>Datos de la serie</legend>
+                                <div class="row pad-lft pad-rgt">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <select class="form-control" name="cbbTipoComprobanteId_Serie" id="cbbTipoComprobanteId_Serie"></select>
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Tipo Comprobante</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Serie" name="txtSerieId_Serie" id="txtSerieId_Serie" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Serie</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Inicial" name="txtInicial_Serie" id="txtInicial_Serie" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Inicial</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Final" name="txtFinal_Serie" id="txtFinal_Serie" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Final</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Actual" name="txtActual_Serie" id="txtActual_Serie" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Actual</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input class="magic-checkbox" type="checkbox" name="chkEsFisica_Serie" id="chkEsFisica_Serie">
+                                                    <label for="demo-form-checkbox">Es serie física</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-offset-9 col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-offset-6 col-sm-6">
+                                                    <button id="btnAgregarSerie" type="button" class="btn btn-dark btn-block" data-accion="A" onclick="btnAgregarSerie_Click(event)">AGREGAR <i class="ion-plus"></i></button>
+                                                </div>
+                                                <div class="col-sm-6 hidden">
+                                                    <button id="btnCancelarSerie" type="button" class="btn btn-danger btn-block" onclick="btnCancelarSerie_Click(event)">CANCELAR <i class="ion-close-round"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Lista de series</legend>
+                                <table id="tblSerie" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="bg-dark">
+                                        <tr>
+                                            <th class="text-light">#</th>
+                                            <th class="text-light">Tipo Comprobante</th>
+                                            <th class="text-light">Serie</th>
+                                            <th class="text-light">Inicial</th>
+                                            <th class="text-light">Final</th>
+                                            <th class="text-light">Actual</th>
+                                            <th class="text-light">Es Físico</th>
+                                            <th class="text-light">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                        </div>
+                        <div id="tab-usuario" class="tab-pane fade">
+                            <input type="hidden" id="txtCantidadUsuarios_Emisor" name="txtCantidadUsuarios_Emisor" value="" />
+                            <div id="msgErrorUsuario"></div>
+                            <fieldset>
+                                <legend>Datos del usuario</legend>
+                                <div class="row pad-lft pad-rgt">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Usuario" name="txtUsuarioId_Usuario" id="txtUsuarioId_Usuario" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Usuario</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <input class="magic-checkbox" type="checkbox" checked name="chkResetearClave_Usuario" id="chkResetearClave_Usuario">
+                                                    <label for="demo-form-checkbox">Resetear contraseña</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-sm-2">
+                                            <button type="button" class="btn btn-dark btn-block" onclick="btnAgregarUsuario(event)">AGREGAR <i class="ion-plus"></i></button>
+                                        </div>*@
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-offset-9 col-sm-3">
+                                            <div class="row">
+                                                <div class="col-sm-offset-6 col-sm-6">
+                                                    <button id="btnAgregarUsuario" type="button" class="btn btn-dark btn-block" data-accion="A" onclick="btnAgregarUsuario_Click(event)">AGREGAR <i class="ion-plus"></i></button>
+                                                </div>
+                                                <div class="col-sm-6 hidden">
+                                                    <button id="btnCancelarUsuario" type="button" class="btn btn-danger btn-block" onclick="btnCancelarUsuario_Click(event)">CANCELAR <i class="ion-close-round"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Lista de usuarios</legend>
+                                <table id="tblUsuario" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="bg-dark">
+                                        <tr>
+                                            <th class="text-light">#</th>
+                                            <th class="text-light">Usuario</th>
+                                            <th class="text-light">Resetear contraseña</th>
+                                            <th class="text-light">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+                @*</div>*@
+                <!--===================================================-->
+                <!--End Default Tabs (Left Aligned)-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="frm-sucursal-modal" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!--Modal header-->
+            <div class="modal-header bg-dark">
+                <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+                <h4 class="modal-title text-light">Registrar Sucursal</h4>
+            </div>
+
+            <!--Modal body-->
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="frmsucursalmodal">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Código" name="txtSucursalId_SucursalModal" id="txtSucursalId_SucursalModal" />
+                                            <span class="bg-dark box-block pad-lft pad-rgt">Código</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Código SUNAT" name="txtCodigoSUNAT_SucursalModal" id="txtCodigoSUNAT_SucursalModal" />
+                                            <span class="bg-dark box-block pad-lft pad-rgt">Código SUNAT</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Nombre" name="txtNombre_SucursalModal" id="txtNombre_SucursalModal" />
+                                            <span class="bg-dark box-block pad-lft pad-rgt">Nombre</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Dirección" name="txtDireccion_SucursalModal" id="txtDireccion_SucursalModal" />
+                                            <span class="bg-dark box-block pad-lft pad-rgt">Dirección</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Referencia" name="txtReferencia_SucursalModal" id="txtReferencia_SucursalModal" />
+                                            <span class="bg-dark box-block pad-lft pad-rgt">Referencia</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <select class="form-control" name="cbbPaisId_SucursalModal" id="cbbPaisId_SucursalModal" onchange="cbbPais_Change(event)"></select>
+                                            <span class="bg-dark box-block pad-lft pad-rgt">País</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <select class="form-control" name="cbbDepartamentoId_SucursalModal" id="cbbDepartamentoId_SucursalModal" onchange="cbbDepartamento_Change(event)"></select>
+                                            <span class="bg-dark box-block pad-lft pad-rgt">Departamento</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <select class="form-control" name="cbbProvinciaId_SucursalModal" id="cbbProvinciaId_SucursalModal" onchange="cbbProvincia_Change(event)"></select>
+                                            <span class="bg-dark box-block pad-lft pad-rgt">Provincia</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <select class="form-control" name="cbbDistritoId_SucursalModal" id="cbbDistritoId_SucursalModal"></select>
+                                            <span class="bg-dark box-block pad-lft pad-rgt">Distrito</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <input class="magic-checkbox val-exc" type="checkbox" checked name="chkEsDireccionFiscal_SucursalModal" id="chkEsDireccionFiscal_SucursalModal">
+                                                <label for="chkEsDireccionFiscal_SucursalModal">Es dirección fiscal</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--Modal footer-->
+            <div class="modal-footer">
+                <button id="btnAgregarSucursalModal" class="btn btn-dark" data-tipo="modal" data-accion="A" onclick="btnAgregarSucursal_Click(event)"><i class="ti-save"></i> Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="frm-sucursalusuario-modal" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!--Modal header-->
+            <div class="modal-header bg-dark">
+                <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+                <h4 class="modal-title text-light">Usuarios Asignados</h4>
+            </div>
+
+            <!--Modal body-->
+            <div class="modal-body">
+                <form id="frmSucursalUsuarioModal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select class="form-control" name="cbbSucursalId_SucursalUsuarioModal" id="cbbSucursalId_SucursalUsuarioModal"></select>
+                                    <span class="bg-dark box-block pad-lft pad-rgt">Sucursal</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select class="form-control" name="cbbUsuarioId_SucursalUsuarioModal" id="cbbUsuarioId_SucursalUsuarioModal"></select>
+                                    <span class="bg-dark box-block pad-lft pad-rgt">Usuario</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <table id="tblSucursalUsuario" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Sucursal</th>
+                            <th>Usuario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--Modal footer-->
+            <div class="modal-footer">
+                <button class="btn btn-dark" data-tipo="modal" onclick="btnAgregarUsuarioSucursal(event)"><i class="ti-save"></i> Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

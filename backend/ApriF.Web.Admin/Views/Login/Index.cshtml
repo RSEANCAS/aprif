@@ -1,0 +1,83 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Login | ApriF - Facturación Electrónica</title>
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+    <!--Open Sans Font [ OPTIONAL ]-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="@Url.Content("~/Assets/css/bootstrap.min.css")" rel="stylesheet">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="@Url.Content("~/Assets/css/nifty.min.css")" rel="stylesheet">
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="@Url.Content("~/Assets/css/demo/nifty-demo-icons.min.css")" rel="stylesheet">
+    <!--=================================================-->
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="@Url.Content("~/Assets/plugins/pace/pace.min.css")" rel="stylesheet">
+    <script src="@Url.Content("~/Assets/plugins/pace/pace.min.js")"></script>
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="@Url.Content("~/Assets/css/demo/nifty-demo.min.css")" rel="stylesheet">
+</head>
+<body>
+    <div id="container" class="cls-container">
+        <!-- BACKGROUND IMAGE -->
+        <!--===================================================-->
+        <div id="bg-overlay"></div>
+        <!-- LOGIN FORM -->
+        <!--===================================================-->
+        <div class="cls-content">
+            <div class="cls-content-sm panel">
+                <div class="panel-body">
+                    <div class="mar-ver pad-btm">
+                        <h2>ApriF Admin</h2>
+                        <h4>Facturación Electrónica</h4>
+                        <p>Ingrese sus credenciales</p>
+                    </div>
+                    <form action="index.html">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Usuario" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Contraseña">
+                        </div>
+                        <div class="pad-all">
+                            <div class="text-left">
+                                <input id="demo-form-checkbox" class="magic-checkbox" type="checkbox">
+                                <label for="demo-form-checkbox">Recordar</label>
+                            </div>
+                            <a href="pages-register.html" class="btn-link mar-lft">¿Olvidaste tu contraseña?</a>
+                        </div>
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Ingresar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--===================================================-->
+        <!-- DEMO PURPOSE ONLY -->
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+    <!--jQuery [ REQUIRED ]-->
+    <script src="@Url.Content("~/Assets/js/jquery.min.js")"></script>
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="@Url.Content("~/Assets/js/bootstrap.min.js")"></script>
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="@Url.Content("~/Assets/js/nifty.min.js")"></script>
+    <!--=================================================-->
+    <!--Background Image [ DEMONSTRATION ]-->
+    <script src="@Url.Content("~/Assets/js/demo/bg-images.js")"></script>
+</body>
+</html>

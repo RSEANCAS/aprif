@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewBag.Titulo = "Opción";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headers{
+    <link href="@Url.Content("~/Assets/plugins/ionicons/css/ionicons.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/themify-icons/themify-icons.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/select2/css/select2.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+    @*<link href="@Url.Content("~/Assets/plugins/datatables/extensions/Responsive/css/responsive.dataTables.min.css")" rel="stylesheet">*@
+    @*<link href="@Url.Content("~/Assets/plugins/datatables/extensions/Responsive/css/responsive.dataTables.css")" rel="stylesheet">*@
+    <link href="@Url.Content("~/Assets/plugins/loaders/css/css-loaders.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.css")" rel="stylesheet">
+}
+
+@section scripts{
+    <script src="@Url.Content("~/Assets/plugins/loaders/blockui.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/datatables/media/js/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/datatables/media/js/dataTables.bootstrap.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/select2/js/select2.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+    <script src="@Url.Content("~/Assets/js/nifty.min.js")"></script>
+    <script src="@Url.Content("~/Assets/plugins/bootbox/bootbox.min.js")"></script>
+
+    <script src="@Url.Content("~/Assets/js/demo/config.js")"></script>
+    <script src="@Url.Content("~/Assets/js/demo/opcion.js")"></script>
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div id="panelOpcion" class="panel panel-dark">
+
+            <!--Panel heading-->
+            <div class="panel-heading">
+                <div class="panel-control">
+                    <button id="btnNuevo" name="btnNuevo" type="button" class="btn" onclick="btnNuevo_Click(event)"><i class="ti-file"></i> NUEVO</button>
+                    <button id="btnGuardar" name="btnGuardar" type="button" class="btn btn-success hidden" data-accion="N" onclick="btnGuardar_Click(event)"><i class="ti-save"></i> GUARDAR</button>
+                    <button id="btnCancelar" name="btnCancelar" type="button" class="btn btn-danger hidden" onclick="btnCancelar_Click(event)"><i class="ti-na"></i> CANCELAR</button>
+                </div>
+                <div class="panel-title">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab-busqueda"><i class="demo-psi-view-list"></i> Búsqueda</a>
+                        </li>
+                        <li class="disabled">
+                            <a data-toggle="tab" href="#tab-opcion"><i class="demo-psi-home"></i> Opcion</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <!--Panel body-->
+            <div id="demo-panel-collapse-default" class="panel-body">
+                <!--Default Tabs (Left Aligned)-->
+                <!--===================================================-->
+                <!--Tabs Content-->
+                <form id="frmOpcion" name="frmOpcion">
+                    <div class="tab-content">
+                        <div id="tab-busqueda" class="tab-pane fade active in">
+                            <fieldset>
+                                <legend>Filtros de búsqueda</legend>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <select class="form-control" name="cbbFiltroPlataformaId" id="cbbFiltroPlataformaId" onchange="cbbFiltroPlataforma_Change(event)" ></select>
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Plataforma</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Ingrese Opcion ID" name="txtFiltroOpcionId" id="txtFiltroOpcionId" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Opción ID</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <select class="form-control" name="cbbFiltroOpcionPadreId" id="cbbFiltroOpcionPadreId" ></select>
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Opción Padre</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Ingrese Nombre" name="txtFiltroNombre" id="txtFiltroNombre" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Nombre</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Ingrese Enlace" name="txtFiltroEnlace" id="txtFiltroEnlace" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Enlace</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input class="form-control val-exc" placeholder="Ingrese Orden" name="txtFiltroOrden" id="txtFiltroOrden" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Orden</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2 col-sm-offset-10">
+                                            <div class="form-group">
+                                                <button id="btnBuscar" class="btn btn-dark btn-block">BUSCAR <i class="ion-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Resultados de la búsqueda</legend>
+                                <table id="tblOpcion" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="bg-dark">
+                                        <tr>
+                                            <th></th>
+                                            <th class="text-light">Plataforma</th>
+                                            <th class="text-light">Opcion ID</th>
+                                            <th class="text-light">Opcion Padre</th>
+                                            <th class="text-light">Nombre</th>
+                                            <th class="text-light">Enlace</th>
+                                            <th class="text-light">Orden</th>
+                                            <th class="text-light">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                        </div>
+                        <div id="tab-opcion" class="tab-pane fade">
+                            <fieldset>
+                                <legend>Datos de la opción</legend>
+                                <div class="row pad-lft pad-rgt">
+                                    <div class="row">
+                                        <input type="hidden" name="txtOpcionId_Opcion" id="txtOpcionId_Opcion" />
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <select class="form-control" name="cbbPlataformaId_Opcion" id="cbbPlataformaId_Opcion" onchange="cbbPlataforma_Change(event)" ></select>
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Plataforma</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <select class="form-control" name="cbbOpcionPadreId_Opcion" id="cbbOpcionPadreId_Opcion"></select>
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Opción Padre</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Nombre" name="txtNombre_Opcion" id="txtNombre_Opcion" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Nombre</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Enlace" name="txtEnlace_Opcion" id="txtEnlace_Opcion" />
+                                                <span class="bg-dark box-block pad-lft pad-rgt">Enlace</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+                @*</div>*@
+                <!--===================================================-->
+                <!--End Default Tabs (Left Aligned)-->
+            </div>
+        </div>
+    </div>
+</div>

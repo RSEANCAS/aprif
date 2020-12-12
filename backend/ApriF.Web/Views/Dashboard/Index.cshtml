@@ -1,0 +1,313 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr class="new-section-sm bord-no">
+
+<h3>APRIF</h3>
+<div id="page-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!--Network Line Chart-->
+            <!--===================================================-->
+            <div id="demo-panel-network" class="panel">
+                <div class="panel-heading">
+                    <div class="panel-control">
+                        <button id="demo-panel-network-refresh" class="btn btn-default btn-active-primary" data-toggle="panel-overlay" data-target="#demo-panel-network"><i class="demo-psi-repeat-2"></i></button>
+                        <div class="dropdown">
+                            <button class="dropdown-toggle btn btn-default btn-active-primary" data-toggle="dropdown" aria-expanded="false"><i class="demo-psi-dot-vertical"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h3 class="panel-title">Panel</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--chart placeholder-->
+<div class="pad-all">
+</div>
+<div class="col-lg-12"  >
+    <div class="row">
+        <div class="col-sm-12 col-lg-3">
+
+            <!--Sparkline Area Chart-->
+            <div class="col-lg-7"></div>
+            <div class="panel panel-success panel-colorful">
+                <div class="pad-all">
+                    <p class="text-lg text-semibold"><i class="demo-pli-data-storage icon-fw"></i> Factura</p>
+                    <p class="mar-no">
+                        <span class="pull-right text-bold">NN</span> Emitidas
+                    </p>
+                    <p class="mar-no">
+                        <span class="pull-right text-bold">NN</span> Anuladas
+                    </p>
+                </div>
+                <div class="pad-all">
+                    <div class="pad-btm">
+                        <div class="progress progress-sm">
+                            <div style="width: 45%;" class="progress-bar progress-bar-light">
+                                <span class="sr-only">45%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pad-btm">
+                        <div class="progress progress-sm">
+                            <div style="width: 89%;" class="progress-bar progress-bar-light">
+                                <span class="sr-only">89%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pad-top text-center">
+                    <!--Placeholder-->
+                    <div id="demo-sparkline-area" class="sparklines-full-content"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-3">
+
+            <!--Sparkline Line Chart-->
+            <div class="panel panel-info panel-colorful">
+                <div class="pad-all">
+                    <p class="text-lg text-semibold">Boletas</p>
+                    <p class="mar-no">
+                        <span class="pull-right text-bold">NN</span> Emitidas
+                    </p>
+                    <p class="mar-no">
+                        <span class="pull-right text-bold">NN</span> Anuladas
+                    </p>
+                </div>
+                <div class="pad-all">
+                    <div class="pad-btm">
+                        <div class="progress progress-sm">
+                            <div style="width: 45%;" class="progress-bar progress-bar-light">
+                                <span class="sr-only">45%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pad-btm">
+                        <div class="progress progress-sm">
+                            <div style="width: 89%;" class="progress-bar progress-bar-light">
+                                <span class="sr-only">89%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pad-top text-center">
+
+                    <!--Placeholder-->
+                    <div id="demo-sparkline-line" class="sparklines-full-content"></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-3">
+
+            <!--Sparkline bar chart -->
+            <div class="panel panel-purple panel-colorful">
+                <div class="pad-all">
+                    <p class="text-lg text-semibold"><i class="demo-pli-basket-coins icon-fw"></i> Nota de Crédito</p>
+                    <p class="mar-no">
+                        <span class="pull-right text-bold">NN</span> Emitidas
+                    </p>
+                    <p class="mar-no">
+                        <span class="pull-right text-bold">NN</span> Anuladas
+                    </p>
+                </div>
+                <div class="pad-all">
+                    <div class="pad-btm">
+                        <div class="progress progress-sm">
+                            <div style="width: 45%;" class="progress-bar progress-bar-light">
+                                <span class="sr-only">45%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pad-btm">
+                        <div class="progress progress-sm">
+                            <div style="width: 89%;" class="progress-bar progress-bar-light">
+                                <span class="sr-only">89%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+
+                    <!--Placeholder-->
+                    <div id="demo-sparkline-bar" class="box-inline"></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-3">
+
+            <!--Sparkline pie chart -->
+            <div class="panel panel-warning panel-colorful">
+                <div class="pad-all">
+                    <p class="text-lg text-semibold">Nota de Débito</p>
+                    <p class="mar-no">
+                        <span class="pull-right text-bold">NN</span> Emitidas
+                    </p>
+                    <p class="mar-no">
+                        <span class="pull-right text-bold">NN</span> Anuladas
+                    </p>
+                </div>
+                <div class="pad-all">
+                    <div class="pad-btm">
+                        <div class="progress progress-sm">
+                            <div style="width: 45%;" class="progress-bar progress-bar-light">
+                                <span class="sr-only">45%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pad-btm">
+                        <div class="progress progress-sm">
+                            <div style="width: 89%;" class="progress-bar progress-bar-light">
+                                <span class="sr-only">89%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">Ultimas Emisiones</h3>
+        </div>
+
+        <!--Data Table-->
+        <!--===================================================-->
+        <div class="panel-body">
+            <div class="pad-btm form-inline">
+                <div class="row">
+                    <div class="col-sm-6 table-toolbar-left">
+                        <button class="btn btn-purple"><i class="demo-pli-add icon-fw"></i>Más</button>
+                        <button class="btn btn-default"><i class="demo-pli-printer icon-lg"></i></button>
+                        <div class="btn-group">
+                            <button class="btn btn-default"><i class="demo-pli-information icon-lg"></i></button>
+                            <button class="btn btn-default"><i class="demo-pli-trash icon-lg"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 table-toolbar-right">
+                        <div class="form-group">
+                            <input type="text" autocomplete="off" class="form-control" placeholder="Buscar" id="demo-input-search2">
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-default"><i class="demo-pli-download-from-cloud icon-lg"></i></button>
+                            <div class="btn-group dropdown">
+                                <button class="btn btn-default btn-active-primary dropdown-toggle" data-toggle="dropdown">
+                                    <i class="demo-pli-dot-vertical icon-lg"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>    
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th class="text-center">Serie - Numero</th>
+                            <th>Cliente</th>
+                            <th>Fecha de Emisión</th>
+                            <th>Importe</th>
+                            <th class="text-center">Estado  </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="#" class="btn-link"> Factura</a></td>
+                            <td class="text-center">-</td>
+                            <td>Steve N. Horton</td>
+                            <td><span class="text-muted">Oct 22, 2014</span></td>
+                            <td>$45.00</td>
+                            <td class="text-center">
+                                <div class="label label-table label-success">Aceptado</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="#" class="btn-link"> Factura</a></td>
+                            <td class="text-center">-</td>
+                            <td>Steve N. Horton</td>
+                            <td><span class="text-muted">Oct 22, 2014</span></td>
+                            <td>$45.00</td>
+                            <td class="text-center">
+                                <div class="label label-table label-warning">Pendiente</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="#" class="btn-link"> Factura</a></td>
+                            <td class="text-center">-</td>
+                            <td>Steve N. Horton</td>
+                            <td><span class="text-muted">Oct 22, 2014</span></td>
+                            <td>$45.00</td>
+                            <td class="text-center">
+                                <div class="label label-table label-danger">Rechazado</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr class="new-section-xs">
+            <div class="pull-right">
+                <ul class="pagination text-nowrap mar-no">
+                    <li class="page-pre disabled">
+                        <a href="#">&lt;</a>
+                    </li>
+                    <li class="page-number active">
+                        <span>1</span>
+                    </li>
+                    <li class="page-number">
+                        <a href="#">2</a>
+                    </li>
+                    <li class="page-number">
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <span>...</span>
+                    </li>
+                    <li class="page-number">
+                        <a href="#">9</a>
+                    </li>
+                    <li class="page-next">
+                        <a href="#">&gt;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--===================================================-->
+<!--End Data Table-->
+<!--Chart information-->
+<!--div class="panel-body">
+    <hr>
+
+    <div class="pad-rgt">
+        <p class="text-semibold text-uppercase text-main">Today Tips</p>
+        <p class="text-muted mar-top">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+    </div>
+</!--div>
+<!--===================================================-->
+<!--End network line chart-->
